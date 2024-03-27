@@ -1,4 +1,5 @@
 import button, { useState } from "react";
+import './App.css'
 
 const Button = (props) => {
   return (
@@ -18,7 +19,7 @@ const App = () => {
       <h1>
         Give feedback
       </h1>
-      <div>
+      <div className="buttons">
         <Button handleClick={() => setGood(good + 1)} text="good" />
         <Button handleClick={() => setNeutral(neutral + 1)} text="neutral" />
         <Button handleClick={() => setBad(bad + 1)} text="bad" />
@@ -26,7 +27,7 @@ const App = () => {
       <h1>
         Statistics
       </h1>
-      <div id="stats">
+      <div className="stats">
         Good {good}
         Neutral {neutral}
         Bad {bad}
