@@ -4,7 +4,7 @@ const Button = (props) => {
 
   return (
     <div>
-      <button>random quote</button>
+      <button>next anecdote</button>
     </div>
   )
 }
