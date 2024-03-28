@@ -2,8 +2,6 @@ import { useState } from 'react'
 
 const Button = (props) => {
 
-  setSelected(handleRandom)
-
   return (
     <div>
       <button>random quote</button>
@@ -11,9 +9,12 @@ const Button = (props) => {
   )
 }
 
-const handleRandom = () => {
-  const rand1 = Math.floor(Math.random() * 8);
-  return rand1
+const Anecdote = (props) => {
+  return(
+    <div>
+      {props.list}[{props.number}]
+    </div>
+  )
 }
 
 const App = () => {
@@ -30,10 +31,16 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
 
+  const handleRandom = () => {
+    const rand1 = Math.floor(Math.random() * 8);
+    setSelected(rand1)
+  }
+
   return (
     <div>
       {anecdotes[selected]}
-      <Button selected={selected}/>
+      <Button selected={selected} handleClick={handleRandom} />
+      <Anecdote list={anecdotes} number={selected}/>
     </div>
   )
 }
