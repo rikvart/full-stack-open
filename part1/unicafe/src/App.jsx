@@ -11,28 +11,32 @@ const Button = (props) => {
 
 const Statistics = (props) => {
   const average = (props.good + props.bad * -1) / props.total;
-  const avg = average.toFixed(2) + " %"
-  const positive = ((props.good / props.total)*100).toFixed(1) + "%"
+  const avg = average.toFixed(2) + " %";
+  const positive = ((props.good / props.total) * 100).toFixed(1) + "%";
 
-  return(
-    <table>
-      <tbody>
-        <StatisticsLine label="good" value={props.good} />
-        <StatisticsLine label="neutral" value={props.neutral} />
-        <StatisticsLine label="bad" value={props.bad} />
-        <StatisticsLine label="all" value={props.total} />
-        <StatisticsLine label="average" value={avg} />
-        <StatisticsLine label="positive" value={positive} />
-      </tbody>
-    </table>
-  );
+  if (props.total == 0)
+    return("No feedback given")
+  else
+    return (
+      <table>
+        <tbody>
+          <StatisticsLine label="good" value={props.good} />
+          <StatisticsLine label="neutral" value={props.neutral} />
+          <StatisticsLine label="bad" value={props.bad} />
+          <StatisticsLine label="all" value={props.total} />
+          <StatisticsLine label="average" value={avg} />
+          <StatisticsLine label="positive" value={positive} />
+        </tbody>
+      </table>
+    );
+  
 };
 
 const StatisticsLine = (props) => {
   return (
     <tr>
       <td>{props.label}</td>
-       <td>{props.value}</td>
+      <td>{props.value}</td>
     </tr>
   );
 };
