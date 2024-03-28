@@ -9,6 +9,25 @@ const Button = (props) => {
   );
 };
 
+const Stats = (props) => {
+  return(
+  <table>
+      <tr>
+        {props.goodName} {props.goodValue}
+      </tr>
+      <tr>
+        {props.neutralName} {props.neutralValue}
+      </tr>
+      <tr>
+        {props.badName} {props.badValue}
+      </tr>
+  </table>
+)
+}
+
+
+
+
 const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
@@ -16,6 +35,8 @@ const App = () => {
   const [total, setTotal] = useState(0);
   const [average, setAverage] = useState(0);
   const [positive, setPositive] = useState(0);
+
+  
 
   
 
@@ -28,14 +49,10 @@ const App = () => {
         <Button handleClick={() => setBad(bad + 1)} text="bad" />
       </div>
       <h1>Statistics</h1>
-      <div className="stats">
-        <div>Good {good}</div>
-        <div>Neutral {neutral}</div>
-        <div>Bad {bad}</div>
-        <div>All {total}</div>
-        <div>Average</div>
-        <div>Total</div>
-      </div>
+      <Stats goodName="good" goodValue={good}/>
+      <Stats neutralName="neutral" neutralValue={neutral}/>
+      <Stats badName="bad" badValue={bad} />
+      {average}
     </div>
   );
 };
