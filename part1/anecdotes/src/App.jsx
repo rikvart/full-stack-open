@@ -2,14 +2,42 @@ import { useState } from "react";
 
 const Button = (props) => {
   return (
+    <>
+      <button onClick={props.handleClick}>{props.label}</button>
+    </>
+  );
+};
+
+const Header = (props) => {
+  return <h1>{props.label}</h1>;
+};
+
+const Anecdote = (props) => {
+  return (
     <div>
-      <button onClick={props.handleClick}>next anecdote</button>
+      <div>{props.list[props.number]}</div>
+      <div> has {props.votes} votes</div>
     </div>
   );
 };
 
-const Anecdote = (props) => {
-  return <div>{props.list[props.number]}</div>;
+const MostVotes = (props) => {
+  let max = props.votes[0];
+  let maxIndex = 0;
+
+  for (var i = 1; i < props.votes.length; i++) {
+    if (props.votes[i] > max) {
+      maxIndex = i;
+      max = props.votes[i];
+    }
+  }
+
+  return (
+    <>
+      <div>{props.list[maxIndex]}</div>
+      <div>has {props.votes[maxIndex]} votes</div>
+    </>
+  );
 };
 
 const App = () => {
@@ -23,26 +51,29 @@ const App = () => {
     "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.",
     "The only way to go fast, is to go well.",
   ];
-  const votes = new Array(anecdotes.length).fill(0)
-  const copy = [...votes]
-
-  
-  
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
+  const [random, setRandom] = useState(0);
 
-  const handleRandom = () => {
-    const rand1 = Math.floor(Math.random() * 8);
-    setSelected(rand1);
-    copy[rand1] += 1    
-    console.log(copy)
+  const handleNext = () => {
+    setRandom(Math.floor(Math.random() * 8));
+    setSelected(random);
+  };
 
+  const handleVote = () => {
+    const copyVotes = [...votes];
+    copyVotes[selected] += 1;
+    setVotes(copyVotes);
   };
 
   return (
     <div>
-      <Anecdote list={anecdotes} number={selected} />
-      <Button selected={selected} handleClick={handleRandom} />
-      
+      <Header label="Anecdote of the day" />
+      <Anecdote list={anecdotes} votes={votes[selected]} number={selected} />
+      <Button handleClick={handleVote} label="vote" />
+      <Button handleClick={handleNext} label="next anecdote" />
+      <Header label="Anecdote with most votes" />
+      <MostVotes list={anecdotes} votes={votes} />
     </div>
   );
 };
