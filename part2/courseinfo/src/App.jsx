@@ -47,9 +47,14 @@ const App = () => {
     }
   ]
 
+ 
+
   return (
-    <Course courses={courses}/>
-  );
-};
+    <div>
+      <Course courses={courses}/>
+    </div>
+  )
+}
+
 
 export default App;

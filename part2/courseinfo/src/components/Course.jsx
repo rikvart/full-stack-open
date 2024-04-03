@@ -1,37 +1,34 @@
+const Header = (props) => {
+  return (
+    <div>
+      <h1>{props.name}</h1>
+    </div>
+  )
+}
 
-  
-  const Header = ({ courses }) => <h1>{courses.course}</h1>;
-  
-  const Total = ({ sum }) => <p>Number of exercises {sum}</p>;
-  
-  const Part = ({ part }) => (
-    <p>
-      {part.name} {part.exercises}
-    </p>
-  );
-  
-  const Content = ({ parts }) => (
+const Total = (props) => <p>Number of exercises {}</p>;
+
+const Part = (props) => (
+  <p>
    
-    <>
-      <Part part={parts.courses[0]} />
-      <Part part={parts.courses[0]} />
-      <Part part={parts.courses[0]} />
-    </>
+  </p>
+);
+
+const Content = ( props ) => (
+  <>
+    
+  </>
+);
+
+const Course = (props) => {
+  console.log(props);
+  return (
+    <div>
+      <Header name={props.courses.name} />
+      <Content parts={props.courses.parts} />
+      <Total parts={props.courses.parts} />
+    </div>
   );
+};
 
-
-  const Course = (props) => {
-
-
-    return (
-      <div>
-        <Header courses={props.courses[0].name} />
-        <Content parts={arr.courses} />
-        <Total
-          sum={1}
-        /> 
-      </div>
-    );
-  };
-
-  export default Course;
+export default Course;
