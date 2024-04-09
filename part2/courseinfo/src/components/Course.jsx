@@ -6,9 +6,8 @@ const Header = (props) => {
   )
 }
 
-const Total = ({ parts }) => {
-  const totalExercises = parts.reduce((sum, part) => sum + part.exercises, 0);
-  return <p>Total number of exercises: {totalExercises}</p>;
+const Total = (props) => {
+  return <p>Total number of exercises: FIX HERE</p>;
 };
 
 
