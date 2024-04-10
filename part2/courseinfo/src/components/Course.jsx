@@ -7,7 +7,7 @@ const Header = (props) => {
 }
 
 const Total = (props) => {
-  return <p>Total number of exercises: FIX HERE</p>;
+  return <p>Total number of exercises:</p>;
 };
 
 
