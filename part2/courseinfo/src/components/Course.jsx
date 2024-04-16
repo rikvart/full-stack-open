@@ -7,7 +7,11 @@ const Header = (props) => {
 }
 
 const Total = (props) => {
-  return <p>Total number of exercises:</p>;
+  console.log(props.parts)
+  let total = props.parts.reduce((accumulator, currentValue, currentIndex, array), 0)
+  c
+  
+  return <p>Total number of exercises: {total}</p>;
 };
 
 
