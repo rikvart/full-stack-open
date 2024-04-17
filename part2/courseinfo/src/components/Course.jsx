@@ -8,11 +8,20 @@ const Header = (props) => {
 
 const Total = (props) => {
   
-
+  
   console.log(props)
   
   
-  return <p>Total number of exercises:</p>;
+  return (<div>
+    <ul>
+      {props.course.parts.map(part => (
+        <li key={part.id}>
+          {part.name} - {part.exercises} exercises
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 };
 
 
@@ -48,7 +57,7 @@ const Course = (props) => {
     <div>
       <Header name={props.courses.name} />
       <Content courses={props.courses} />
-      <Total parts={props.courses[1]} />
+      <Total courses={props.courses} />
     </div>
   );
 };
