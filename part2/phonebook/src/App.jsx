@@ -3,11 +3,11 @@ import { useState } from "react";
 const App = () => {
   const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
 
-  const [newName, setNewName] = useState("a new note...");
+  const [newName, setNewName] = useState("");
 
   const addName = (event) => {
     event.preventDefault();
-    setPersons(persons + newName);
+    setPersons([...persons, newName]);
     console.log("event clicked", event.target);
   };
 
@@ -27,7 +27,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <form>
         <div>
-          name: <input onChange={handleNameChange} />
+          name: <input value={newName} onChange={handleNameChange} />
         </div>
         <div>
           <button type="submit" onClick={addName}>
