@@ -7,7 +7,6 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault();
-    setPersons([...persons, newName]);
     console.log("event clicked", event.target);
   };
 
