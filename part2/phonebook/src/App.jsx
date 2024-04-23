@@ -8,11 +8,13 @@ const App = () => {
   const addName = (event) => {
     event.preventDefault();
     console.log("event clicked", event.target);
+    console.log(event.target)
   };
 
   const handleNameChange = (event) => {
     console.log(event.target.value);
     setNewName(event.target.value);
+    console.log(event.target)
   };
 
   const Name = (props) => {
