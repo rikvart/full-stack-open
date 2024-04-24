@@ -1,26 +1,27 @@
 import { useState } from "react";
 
+const Name = (props) => {
+  return <div>{props.name}</div>;
+};
+
 const App = () => {
   const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
 
   const [newName, setNewName] = useState("");
 
   const addName = (event) => {
+    if (persons.includes({newName})) {
+      alert(`${newName} is already added to phonebook`)
+    } else {
     event.preventDefault();
     console.log("event clicked", event.target);
-    console.log(event.target)
+    persons.push({ name: newName });
+    setNewName("");
+    }
   };
 
   const handleNameChange = (event) => {
-    console.log(event.target.value);
     setNewName(event.target.value);
-    console.log(event.target)
-  };
-
-  const Name = (props) => {
-    return (
-         <>{props.name}</>
-    );
   };
 
   return (
