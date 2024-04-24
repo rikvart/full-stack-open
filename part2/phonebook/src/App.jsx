@@ -10,13 +10,18 @@ const App = () => {
   const [newName, setNewName] = useState("");
 
   const addName = (event) => {
-    if (persons.includes({newName})) {
-      alert(`${newName} is already added to phonebook`)
-    } else {
     event.preventDefault();
-    console.log("event clicked", event.target);
-    persons.push({ name: newName });
-    setNewName("");
+
+    const newObj = {name: newName}
+    
+
+    if (persons.includes(newObj)) {
+      alert("already in array");
+      console.log("it is")
+    } else {
+      persons.push(newObj);
+      setNewName("");
+      console.log("it is not")
     }
   };
 
