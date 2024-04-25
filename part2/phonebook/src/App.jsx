@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Contact = (props) => {
-  return <div>{props.name} {props.number}</div>;
+  return <div>{props.contact.name} - {props.contact.number}</div>;
 };
 
 const App = () => {
@@ -15,8 +15,10 @@ const App = () => {
 
     const newObj = { name: newName, number: newNumber};
 
+    console.log(newObj)
+
     const existingObject = persons.find(
-      (object) => object.name === newObj.name
+      (object) => object.number === newObj.number
     );
 
     if (existingObject) {
@@ -25,6 +27,7 @@ const App = () => {
     } else {
       persons.push(newObj);
       setNewName("");
+      setNewNumber("");
     }
   };
 
