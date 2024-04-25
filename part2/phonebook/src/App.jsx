@@ -1,18 +1,19 @@
 import { useState } from "react";
 
-const Name = (props) => {
-  return <div>{props.name}</div>;
+const Contact = (props) => {
+  return <div>{props.name} {props.number}</div>;
 };
 
 const App = () => {
-  const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
+  const [persons, setPersons] = useState([{ name: "Arto Hellas", number: "05041000418" }]);
 
   const [newName, setNewName] = useState("");
+  const [newNumber, setNewNumber] = useState("");
 
   const addName = (event) => {
     event.preventDefault();
 
-    const newObj = { name: newName };
+    const newObj = { name: newName, number: newNumber};
 
     const existingObject = persons.find(
       (object) => object.name === newObj.name
@@ -31,12 +32,19 @@ const App = () => {
     setNewName(event.target.value);
   };
 
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value);
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
       <form>
         <div>
           name: <input value={newName} onChange={handleNameChange} />
+        </div>
+        <div>
+          number: <input value={newNumber} onChange={handleNumberChange} />
         </div>
         <div>
           <button type="submit" onClick={addName}>
@@ -47,7 +55,7 @@ const App = () => {
       <h2>Numbers</h2>
       <ul>
         {persons.map((person) => (
-          <Name key={person.name} name={person.name} />
+          <Contact key={person.number} contact={person} />
         ))}
       </ul>
     </div>
