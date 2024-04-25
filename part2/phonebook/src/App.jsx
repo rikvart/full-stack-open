@@ -12,16 +12,18 @@ const App = () => {
   const addName = (event) => {
     event.preventDefault();
 
-    const newObj = {name: newName}
-    
+    const newObj = { name: newName };
 
-    if (persons.includes(newObj)) {
-      alert("already in array");
-      console.log("it is")
+    const existingObject = persons.find(
+      (object) => object.name === newObj.name
+    );
+
+    if (existingObject) {
+      alert(`${newName} already exists in the phone book`);
+      setNewName("");
     } else {
       persons.push(newObj);
       setNewName("");
-      console.log("it is not")
     }
   };
 
