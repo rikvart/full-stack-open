@@ -44,6 +44,7 @@ const Course = (props) => {
   
   return (
     <div>
+      <h1>Web development curriculum</h1>
       <Header name={props.courses.name} />
       <Content courses={props.courses} />
     </div>
