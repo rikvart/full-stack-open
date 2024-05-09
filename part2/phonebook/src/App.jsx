@@ -5,7 +5,12 @@ const Contact = (props) => {
 };
 
 const App = () => {
-  const [persons, setPersons] = useState([{ name: "Arto Hellas", number: "05041000418" }]);
+  const [persons, setPersons] = useState([
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+  
+  ])
 
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
