@@ -9,7 +9,7 @@ function Filter(props) {
 
   return (
     <>
-      Search: <input></input>
+      Search: <input>test</input>
     </>
   );
 }
