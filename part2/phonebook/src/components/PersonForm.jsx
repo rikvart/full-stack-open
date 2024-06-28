@@ -48,7 +48,7 @@ function PersonForm(props) {
           name: <input value={newName} onChange={handleNameChange} />
         </div>
         <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
+          number: <input value={newName} onChange={handleNumberChange} />
         </div>
         <div>
           <button type="submit" onClick={addName}>

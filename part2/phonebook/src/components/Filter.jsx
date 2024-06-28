@@ -1,16 +1,23 @@
 import React from "react";
+import { useState } from "react";
 
 function Filter(props) {
+
+
+  const currentFilter = useState("")
+
   const handleFilter = (event) => {
-    const value = event.target.value;
-    const filtered = users.filter((user) => user.name.includes(value));
+    const currentValue = currentFilter;
+    const filtered = users.filter((user) => user.name.includes(currentValue));
     setFilteredUsers(filtered);
   };
 
+
+
   return (
-    <>
-      Search: <input>test</input>
-    </>
+    <div>
+      Search: <input value={currentFilter} />
+    </div>
   );
 }
 
