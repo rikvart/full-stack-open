@@ -16,7 +16,7 @@ function Filter(props) {
 
   return (
     <div>
-      Search: <input value={currentFilter} />
+      Search: <input value={currentFilter} onChange={handleFilter} />
     </div>
   );
 }
