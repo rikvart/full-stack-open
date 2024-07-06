@@ -45,6 +45,13 @@ const App = () => {
       setNewNumber("");
     }
   };
+
+
+  const handleFilter = (event) => {
+    const currentValue = currentFilter;
+    const filtered = users.filter((user) => user.name.includes(currentValue));
+    setFilteredUsers(filtered);
+  };
   
 
 
@@ -54,7 +61,11 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Filter />
+      <Filter 
+      filter={filter}
+      handleFilter={handleFilter()}
+      
+      />
       <h3> add new</h3>
       <PersonForm persons={persons}/>
       <h2>Numbers</h2>
