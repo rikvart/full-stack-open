@@ -7,7 +7,7 @@ function Filter(props) {
 
   return (
     <div>
-      Search: <input value={currentFilter} onChange={handleFilter} />
+      filter
     </div>
   );
 }

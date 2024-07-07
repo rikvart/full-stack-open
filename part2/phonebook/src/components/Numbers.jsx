@@ -2,6 +2,9 @@ import React from "react";
 import { useState } from "react";
 
 function Numbers(props) {
+
+  console.log(props.persons)
+
   const Contact = (props) => {
     return (
       <div>
@@ -12,7 +15,7 @@ function Numbers(props) {
 
   return (
     <ul>
-      {persons.map((person) => (
+      {props.persons.map((person) => (
         <Contact key={person.number} contact={person} />
       ))}
     </ul>
