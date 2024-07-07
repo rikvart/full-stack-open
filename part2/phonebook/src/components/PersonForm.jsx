@@ -20,7 +20,6 @@ function PersonForm(props) {
 
   const handleSubmit = (event) => {
       props.addPerson({name: newName, number: newNumber})
-
   }
 
 

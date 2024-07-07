@@ -16,9 +16,13 @@ const App = () => {
 
   ]) 
 
+  
 
-  const addPerson = (props) => {
-    console.log('button clicked', props)
+  
+
+
+  const addPerson = (event) => {
+     
   }
 
   return (
