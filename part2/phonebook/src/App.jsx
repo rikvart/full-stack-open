@@ -48,7 +48,7 @@ const App = () => {
 
 
   const handleFilter = (event) => {
-    const currentValue = currentFilter;
+    const currentValue = filter;
     const filtered = users.filter((user) => user.name.includes(currentValue));
     setFilteredUsers(filtered);
   };
