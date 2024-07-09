@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PersonForm from "./components/PersonForm";
 import Numbers from "./components/Numbers";
+import Filter from "./components/Filter";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -11,6 +12,7 @@ const App = () => {
 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [showAll, setShowAll] = useState(true)
   const [filter, setFilter] = useState('')
 
   const handleNameChange = (event) => {
@@ -33,8 +35,14 @@ const App = () => {
     
   }
 
-  const handleFilterChange = (event) => {
 
+  const personsToShow = showAll
+    ? persons
+    : persons.filter(person => person.name == filter)
+
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value);
+    console.log(filter)
   }
 
   return (
@@ -45,7 +53,13 @@ const App = () => {
         handleNumberChange={handleNumberChange}
         handleFilterChange={handleFilterChange}
       />
-      <Numbers persons={persons} />
+      <Numbers 
+        persons={persons} 
+        personsToShow={personsToShow}
+      />
+      <Filter 
+        handleFilterChange={handleFilterChange}
+      />
     </div>
   );
 };
