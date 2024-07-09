@@ -28,13 +28,14 @@ const App = () => {
       persons.push({name: newName, number: newNumber})
       console.log("added")
       console.log(persons)
+      setNewName("")
+      setNewNumber("")
     
   }
 
   const handleFilterChange = (event) => {
 
   }
-
 
   return (
     <div>
