@@ -1,75 +1,82 @@
 import { useState } from "react";
-import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Numbers from "./components/Numbers";
-
-
+import Filter from "./components/Filter";
 
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456', id: 1 },
     { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
     { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
-  
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ])
-  const [filter, setFilter] = useState("")
-  const [newName, setNewName] = useState("")
-  const [newNumber, setNewNumber] = useState("")
-  
-  
-  const handleNameChange = (event) => {
-    setNewName(event.target.value);
-  };
 
-  const handleNumberChange = (event) => {
-    setNewNumber(event.target.value);
-  };
+  const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
+  const [showAll, setShowAll] = useState(true)
+  const [filter, setFilter] = useState('')
 
-  const addName = (event) => {
-    event.preventDefault();
-
-    const newObj = { name: newName, number: newNumber };
-
-    console.log(newObj);
-
-    const existingObject = persons.find(
-      (object) => object.number === newObj.number
+  const filteredPersons = filter === ''
+  ? persons
+  : persons.filter(person =>
+      person.name.toLowerCase().includes(filter.toLowerCase())
     );
 
-    if (existingObject) {
-      alert(`${newName} already exists in the phone book`);
-      setNewName("");
-    } else {
-      persons.push(newObj);
-      setNewName("");
-      setNewNumber("");
-    }
+  const handleNameChange = (event) => {
+    setNewName(event.target.value)
+    console.log(newName)
+  }
+  
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
+    console.log(newNumber)
+  }
+
+  const handleSubmit = (event) => {
+      
+      event.preventDefault();
+
+      const nameExists = persons.some(person => person.name.toLowerCase() === newName.toLowerCase());
+
+      if (nameExists) {
+        alert("Name already in phonebook");
+        return;
+      } else {
+
+      const newPerson = { name: newName, number: newNumber, id: persons.legth + 1};
+      setPersons([...persons, newPerson]); 
+      console.log("added")
+      console.log(persons)
+      setNewName("")
+      setNewNumber("")
+      }
+    
+  }
+
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value);
   };
 
 
-  const handleFilter = (event) => {
-    const currentValue = currentFilter;
-    const filtered = users.filter((user) => user.name.includes(currentValue));
-    setFilteredUsers(filtered);
-  };
   
-
-
-
-  
-
   return (
     <div>
-      <h2>Phonebook</h2>
-      <Filter 
-      filter={filter}
-      handleFilter={handleFilter()}
-      
+      <PersonForm
+        handleSubmit={handleSubmit}
+        handleNameChange={handleNameChange}
+        handleNumberChange={handleNumberChange}
+        handleFilterChange={handleFilterChange}
       />
-      <h3> add new</h3>
-      <PersonForm persons={persons}/>
-      <h2>Numbers</h2>
-      <Numbers />
+      <Numbers 
+        filteredPersons={filteredPersons}
+        persons={persons}
+       
+      />
+      <Filter 
+        filter={filter}
+        filteredPersons={filteredPersons}
+        handleFilterChange={handleFilterChange}
+      />
     </div>
   );
 };
