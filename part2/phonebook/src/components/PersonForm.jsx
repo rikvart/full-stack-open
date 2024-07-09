@@ -4,36 +4,17 @@ import { useState } from "react";
 function PersonForm(props) {
 
 
-  
-  const [newName, setNewName] = useState('')
-  const [newNumber, setNewNumber] = useState('')
-
-  const handleNameChange = (event) => {
-    setNewName(event.target.value)
-    console.log(newName)
-  }
-  
-  const handleNumberChange = (event) => {
-    setNewNumber(event.target.value)
-    console.log(newNumber)
-  }
-
-  const handleSubmit = (event) => {
-      props.addPerson({name: newName, number: newNumber})
-  }
-
-
   return (
     <div>
       <form>
         <div>
-          name: <input value={props.newName} onChange={handleNameChange} />
+          name: <input value={props.newName} onChange={props.handleNameChange} />
         </div>
         <div>
-          number: <input value={props.newName} onChange={handleNumberChange} />
+          number: <input value={props.newName} onChange={props.handleNumberChange} />
         </div>
         <div>
-          <button type="submit" onClick={handleSubmit}>
+          <button type="submit" onClick={props.handleSubmit}>
             add
           </button>
         </div>

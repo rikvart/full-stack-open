@@ -3,8 +3,6 @@ import { useState } from "react";
 
 function Numbers(props) {
 
-  console.log(props.persons)
-
   const Contact = (props) => {
     return (
       <div>
