@@ -15,10 +15,12 @@ function Numbers(props) {
 
   return (
     <ul>
-      {props.personsToShow.map((person) => (
-        <Contact key={person.number} contact={person} />
-      ))}
-    </ul>
+        {props.filteredPersons.map(person => (
+          <li key={person.id}>
+            {person.name} {person.number}
+          </li>
+        ))}
+      </ul>
   );
 }
 
