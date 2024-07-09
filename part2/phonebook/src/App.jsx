@@ -33,12 +33,23 @@ const App = () => {
   }
 
   const handleSubmit = (event) => {
+      
       event.preventDefault();
-      persons.push({name: newName, number: newNumber})
+
+      const nameExists = persons.some(person => person.name.toLowerCase() === newName.toLowerCase());
+
+      if (nameExists) {
+        alert("Name already in phonebook");
+        return;
+      } else {
+
+      const newPerson = { name: newName, number: newNumber, id: persons.legth + 1};
+      setPersons([...persons, newPerson]); 
       console.log("added")
       console.log(persons)
       setNewName("")
       setNewNumber("")
+      }
     
   }
 
