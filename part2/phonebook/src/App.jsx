@@ -1,21 +1,23 @@
-import { useState } from "react";
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 import PersonForm from "./components/PersonForm";
 import Numbers from "./components/Numbers";
 import Filter from "./components/Filter";
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: "Arto Hellas", number: "040-123456", id: 1 },
-    { name: "Ada Lovelace", number: "39-44-5323523", id: 2 },
-    { name: "Dan Abramov", number: "12-43-234345", id: 3 },
-    { name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
-  ]);
-
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [filter, setFilter] = useState("");
+
+  useEffect(() => {
+    console.log("effect");
+    axios.get("http://localhost:3001/persons").then((response) => {
+      console.log("promise fulfilled");
+      setPersons(response.data);
+    });
+  }, []);
 
   const filteredPersons =
     filter === ""
@@ -62,16 +64,12 @@ const App = () => {
     setFilter(event.target.value);
   };
 
-<<<<<<< HEAD
-
   const handleFilter = (event) => {
     const currentValue = filter;
     const filtered = users.filter((user) => user.name.includes(currentValue));
     setFilteredUsers(filtered);
   };
-  
-=======
->>>>>>> 43c18c9b5af7ac8d8e8664cf239fd1b31e59ac02
+
   return (
     <div>
       <PersonForm
