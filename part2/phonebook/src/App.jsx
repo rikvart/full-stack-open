@@ -3,7 +3,7 @@ import axios from "axios";
 import PersonForm from "./components/PersonForm";
 import Numbers from "./components/Numbers";
 import Filter from "./components/Filter";
-import noteService from './services/persons'
+import personsService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -13,12 +13,12 @@ const App = () => {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    console.log("effect");
-    axios.get("http://localhost:3001/persons").then((response) => {
-      console.log("promise fulfilled");
-      setPersons(response.data);
-    });
-  }, []);
+    personsService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
+      })
+  }, [])
 
   const filteredPersons =
     filter === ""
