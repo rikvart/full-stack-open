@@ -21,14 +21,9 @@
       "id": "4"
     },
     {
-      "id": null,
+      "id": 5,
       "name": "test",
       "number": "test"
-    },
-    {
-      "id": 6,
-      "name": "test4",
-      "number": "test4"
     }
   ]
 }

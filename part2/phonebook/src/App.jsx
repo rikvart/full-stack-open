@@ -3,6 +3,7 @@ import axios from "axios";
 import PersonForm from "./components/PersonForm";
 import Numbers from "./components/Numbers";
 import Filter from "./components/Filter";
+import noteService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([]);
