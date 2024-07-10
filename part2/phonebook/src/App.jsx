@@ -58,14 +58,11 @@ const App = () => {
   };
 
 
-<<<<<<< HEAD
   const handleFilter = (event) => {
     const currentValue = filter;
     const filtered = users.filter((user) => user.name.includes(currentValue));
     setFilteredUsers(filtered);
   };
-=======
->>>>>>> refs/remotes/origin/main
   
   return (
     <div>
