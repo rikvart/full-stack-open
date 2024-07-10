@@ -50,9 +50,11 @@ const App = () => {
       const newPerson = {
         name: newName,
         number: newNumber,
-        id: persons.legth + 1,
+        id: persons.length + 1,
       };
-      setPersons([...persons, newPerson]);
+      axios.post("http://localhost:3001/persons", newPerson).then((response) => {
+        console.log(response);
+      });
       console.log("added");
       console.log(persons);
       setNewName("");
