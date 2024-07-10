@@ -7,7 +7,11 @@ function Filter(props) {
 
   return (
     <div>
-      Search: <input value={currentFilter} onChange={handleFilter} />
+     <form>
+        <div>
+          name: <input value={props.filter} onChange={props.handleFilterChange} />
+        </div>
+      </form>
     </div>
   );
 }

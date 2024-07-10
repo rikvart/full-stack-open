@@ -2,6 +2,9 @@ import React from "react";
 import { useState } from "react";
 
 function Numbers(props) {
+
+
+
   const Contact = (props) => {
     return (
       <div>
@@ -12,10 +15,12 @@ function Numbers(props) {
 
   return (
     <ul>
-      {persons.map((person) => (
-        <Contact key={person.number} contact={person} />
-      ))}
-    </ul>
+        {props.filteredPersons.map(person => (
+          <li key={person.id}>
+            {person.name} {person.number}
+          </li>
+        ))}
+      </ul>
   );
 }
 
