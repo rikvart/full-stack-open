@@ -18,7 +18,7 @@ function Numbers(props) {
     <ul>
         {props.filteredPersons.map(person => (
           <li key={person.id}>
-            {person.name} {person.number} <button onClick={props.handleDelete(person.id)}>DELETE</button>
+            {person.name} {person.number} <button value={person.id} onClick={props.handleDelete(person)}>DELETE</button>
           </li>
         ))}
       </ul>

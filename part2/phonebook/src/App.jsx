@@ -68,9 +68,11 @@ const App = () => {
     setFilteredUsers(filtered);
   };
 
-  const handleDelete = (props) => {
-    const idToDelete = props.id
-    personsService.remove(idToDelete).then((reponse) => console.log(response));
+  const handleDelete = (event) => {
+    event.preventDefault();
+    console.log("deleted" + event.target.value)
+  //   const idToDelete = props.id
+  //   personsService.remove(idToDelete).then((reponse) => console.log(response));
   };
 
   return (
