@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+
+
 function Numbers(props) {
 
 
@@ -16,7 +18,7 @@ function Numbers(props) {
     <ul>
         {props.filteredPersons.map(person => (
           <li key={person.id}>
-            {person.name} {person.number} <button onClick={console.log("delted")}>DELETE</button>
+            {person.name} {person.number} <button onClick={props.handleDelete(person.id)}>DELETE</button>
           </li>
         ))}
       </ul>

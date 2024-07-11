@@ -9,7 +9,6 @@ const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
-  const [showAll, setShowAll] = useState(true);
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
@@ -69,6 +68,11 @@ const App = () => {
     setFilteredUsers(filtered);
   };
 
+  const handleDelete = (props) => {
+    const idToDelete = props.id
+    personsService.remove(idToDelete).then((reponse) => console.log(response));
+  };
+
   return (
     <div>
       <PersonForm
@@ -82,7 +86,11 @@ const App = () => {
         filteredPersons={filteredPersons}
         handleFilterChange={handleFilterChange}
       />
-      <Numbers filteredPersons={filteredPersons} persons={persons} />
+      <Numbers
+        filteredPersons={filteredPersons}
+        persons={persons}
+        handleDelete={handleDelete}
+      />
     </div>
   );
 };
