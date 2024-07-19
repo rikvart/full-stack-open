@@ -1,10 +1,15 @@
 import React from "react";
 import { useState } from "react";
+import personsService from "../services/persons";
 
 
 function Numbers(props) {
 
+  const handleDelete = (event) => {
+    personsService.remove(event.target.value)
+    console.log("deleted" + event.target.value)
 
+  };
 
   const Contact = (props) => {
     return (
@@ -18,7 +23,7 @@ function Numbers(props) {
     <ul>
         {props.filteredPersons.map(person => (
           <li key={person.id}>
-            {person.name} {person.number} <button value={person.id} onClick={props.handleDelete(person)}>DELETE</button>
+            {person.name} {person.number} <button value={person.id} onClick={handleDelete}>Delete</button>
           </li>
         ))}
       </ul>

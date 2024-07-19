@@ -68,8 +68,8 @@ const App = () => {
   };
 
   const handleDelete = (event) => {
-    event.preventDefault();
-    console.log("deleted" + event.target.value)
+    personsService.remove(event.target.value)
+    console.log("deleted" + event.target)
 
   };
 
