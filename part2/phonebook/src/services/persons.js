@@ -17,10 +17,10 @@ const update = (id, newObject) => {
 }
 
 const remove = (id) => {
-    console.log(`${baseUrl}/${id}`)
-    return axios.delete(`${baseUrl}/${id}`);
-    console.log(`${baseUrl}/${id}`)
-  };
+  console.log(`${baseUrl}/${id}`);
+  return axios.delete(`${baseUrl}/${id}`);
+};
+
   
 
 export default { getAll, create, update, remove };

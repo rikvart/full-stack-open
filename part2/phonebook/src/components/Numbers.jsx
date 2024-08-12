@@ -6,7 +6,8 @@ import personsService from "../services/persons";
 function Numbers(props) {
 
   const handleDelete = (event) => {
-    personsService.remove(event.target.value)
+    const id = event.target.value;
+    personsService.remove(id)
     console.log("deleted" + event.target.value)
 
   };
