@@ -3,18 +3,29 @@ import PersonForm from "./components/PersonForm";
 import Numbers from "./components/Numbers";
 import Filter from "./components/Filter";
 import personsService from "./services/persons";
+import "./index.css";
+import Notification from "./components/Notification"
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
+  const [errorMessage, setErrorMessage] = useState("Some error happened");
 
   useEffect(() => {
     personsService.getAll().then((initialPersons) => {
       setPersons(initialPersons);
     });
   }, []);
+
+  const notification = ({ message }) => {
+    if (message === null) {
+      return null;
+    }
+
+    return <div className="error">{message}</div>;
+  };
 
   const filteredPersons =
     filter === ""
@@ -67,30 +78,23 @@ const App = () => {
     setFilteredUsers(filtered);
   };
 
-  const handleDelete = (event) => {
-    personsService.remove(event.target.value)
-    console.log("deleted" + event.target)
-
-  };
-
   return (
     <div>
+      <h1>Add contacts</h1>
       <PersonForm
         handleSubmit={handleSubmit}
         handleNameChange={handleNameChange}
         handleNumberChange={handleNumberChange}
         handleFilterChange={handleFilterChange}
       />
+      <Notification message={errorMessage} />
       <Filter
         filter={filter}
         filteredPersons={filteredPersons}
         handleFilterChange={handleFilterChange}
       />
-      <Numbers
-        filteredPersons={filteredPersons}
-        persons={persons}
-        handleDelete={handleDelete}
-      />
+      <h1>Numbers</h1>
+      <Numbers filteredPersons={filteredPersons} persons={persons} />
     </div>
   );
 };
