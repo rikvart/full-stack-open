@@ -17,7 +17,14 @@ const App = () => {
     personsService.getAll().then((initialPersons) => {
       setPersons(initialPersons);
     });
-  }, []);
+  }, );
+
+  const updatePersonList = () => {
+    personsService.getAll().then((initialPersons) => {
+      setPersons(initialPersons);
+    });
+  }
+
 
   const notification = ({ message }) => {
     if (message === null) {
@@ -55,16 +62,22 @@ const App = () => {
       alert("Name already in phonebook");
       return;
     } else {
+      const newId = persons.length + 1
       const newPerson = {
         name: newName,
         number: newNumber,
-        id: persons.length + 1,
+        id: newId.toString()
       };
+      console.log(newPerson)
       personsService.create(newPerson).then((response) => {
         console.log(response);
       });
       setNewName("");
       setNewNumber("");
+      updatePersonList();
+
+      
+      
     }
   };
 
@@ -88,11 +101,13 @@ const App = () => {
         handleFilterChange={handleFilterChange}
       />
       <Notification message={errorMessage} />
+      <h1>Search</h1>
       <Filter
         filter={filter}
         filteredPersons={filteredPersons}
         handleFilterChange={handleFilterChange}
       />
+      
       <h1>Numbers</h1>
       <Numbers filteredPersons={filteredPersons} persons={persons} />
     </div>
