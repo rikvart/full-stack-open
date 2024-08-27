@@ -5,10 +5,14 @@ import personsService from "../services/persons";
 function Numbers(props) {
 
   const handleDelete = (event) => {
-   
+   if (window.confirm("do you want to delete this number?")) {
       const id = event.target.value;
       personsService.remove(id);
       console.log("deleted" + event.target.value);
+   } else {
+    
+   }
+      
    
     
   };
