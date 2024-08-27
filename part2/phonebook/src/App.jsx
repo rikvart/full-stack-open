@@ -4,7 +4,7 @@ import Numbers from "./components/Numbers";
 import Filter from "./components/Filter";
 import personsService from "./services/persons";
 import "./index.css";
-import Notification from "./components/Notification"
+import Notification from "./components/Notification";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -17,14 +17,22 @@ const App = () => {
     personsService.getAll().then((initialPersons) => {
       setPersons(initialPersons);
     });
-  }, );
+  }, []);
 
-  const updatePersonList = () => {
+  const fetchData = () => {
     personsService.getAll().then((initialPersons) => {
       setPersons(initialPersons);
     });
-  }
+  };
 
+  const updatePersonList = () => {
+    personsService
+      .getAll()
+      .then((initialPersons) => {
+        setPersons(initialPersons);
+      })
+      .then(fetchData());
+  };
 
   const notification = ({ message }) => {
     if (message === null) {
@@ -58,27 +66,46 @@ const App = () => {
       (person) => person.name.toLowerCase() === newName.toLowerCase()
     );
 
+    const existingPerson = persons.find(
+      (person) => person.name.toLowerCase() === newName.toLowerCase()
+    );
+
     if (nameExists) {
-      alert("Name already in phonebook");
-      return;
+      if (window.confirm(`${newName} is already in the phonebook. Replace the number?`)) {
+        const updatedPerson = { ...existingPerson, number: newNumber };
+
+        personsService
+          .update(updatedPerson.id, updatedPerson)
+          .then(() => {
+            setErrorMessage(`${newName}'s number updated successfully`);
+            fetchData();
+          })
+          .catch((error) => {
+            setErrorMessage(`Error updating ${newName}'s number`);
+          });
+      }
     } else {
-      const newId = persons.length + 1
       const newPerson = {
         name: newName,
         number: newNumber,
-        id: newId.toString()
       };
-      console.log(newPerson)
-      personsService.create(newPerson).then((response) => {
-        console.log(response);
-      });
-      setNewName("");
-      setNewNumber("");
-      updatePersonList();
 
-      
-      
+      personsService
+        .create(newPerson)
+        .then(() => {
+          setErrorMessage(`${newName} added successfully`);
+          fetchData();
+        })
+        .catch((error) => {
+          setErrorMessage("Error adding the person");
+        });
     }
+
+    setNewName("");
+    setNewNumber("");
+    setTimeout(() => {
+      setErrorMessage(null);
+    }, 3000); // Clear notification after 3 seconds
   };
 
   const handleFilterChange = (event) => {
@@ -107,7 +134,7 @@ const App = () => {
         filteredPersons={filteredPersons}
         handleFilterChange={handleFilterChange}
       />
-      
+
       <h1>Numbers</h1>
       <Numbers filteredPersons={filteredPersons} persons={persons} />
     </div>

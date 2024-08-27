@@ -4,13 +4,6 @@ import { useState } from "react";
 function PersonForm(props) {
 
 
-  const handleDelete = (event) => {
-    personsService.remove(event.target.value)
-    console.log("deleted" + event.target)
-
-  };
-
-
   return (
     <div>
       <form>
