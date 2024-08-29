@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Search from "./components/Search";
 import axios from 'axios';
+import Countrylist from "./components/Countrylist";
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
   const getAll = () => {
     const request = axios.get('https://studies.cs.helsinki.fi/restcountries/api/all')
     return request.then(response => response.data)
+    
   }
   
   useEffect(() => {
@@ -17,11 +19,14 @@ function App() {
     });
   }, []);
 
-  console.log(countryData)
+
+  console.log("country data", countryData)
 
   return (
     <div>
       <Search />
+      <Countrylist 
+      data={countryData}/>
     </div>
   );
 }
