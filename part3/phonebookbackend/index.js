@@ -1,7 +1,9 @@
 const express = require("express");
+var morgan = require('morgan')
 const app = express();
 
-app.use(express.json());
+app.use(express.json())
+app.use(morgan(':method :url :body'))
 
 let persons = [
   {
@@ -55,9 +57,11 @@ app.post("/api/persons", (request, response) => {
   } else if(newPerson.name === "" || newPerson.number === "") {
     response.json({error: "missing information"})
   }else {
-    persons = persons.concat(person);
-    console.log(person);
-    response.json(person);
+    persons = persons.concat(newPerson);
+    console.log(newPerson);
+    response.json(newPerson);
+    morgan.token('body', request => JSON.stringify(request.body))
+    
   }
 });
 
