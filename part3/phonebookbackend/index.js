@@ -33,6 +33,11 @@ let persons = [
       : 0
     return String(maxId + 1)
   }
+
+  const personsNum = () => {
+    const amount = persons.length
+    return amount;
+  }
   
   app.post('/api/persons', (request, response) => {
     const body = request.body
@@ -57,6 +62,15 @@ let persons = [
 app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
 })
+
+
+app.get('/info', (request, response) => {
+  
+  
+  response.send("Phonebook has info for " + personsNum() + " people </br>" + Date.now())
+})
+
+
 
 app.get('/api/persons', (request, response) => {
   response.json(persons)
