@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+{
+    "name": "VS code rest cilient is pretty good",
+    "number": 123451234
+
+}
