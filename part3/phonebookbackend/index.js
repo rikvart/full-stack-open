@@ -67,7 +67,7 @@ app.get('/', (request, response) => {
 app.get('/info', (request, response) => {
   
   
-  response.send("Phonebook has info for " + personsNum() + " people </br>" + Date.now())
+  response.send("Phonebook has info for " + personsNum() + " people </br>" + Date())
 })
 
 
