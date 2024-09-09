@@ -1,9 +1,10 @@
 const express = require("express");
-var morgan = require('morgan')
+var morgan = require("morgan");
 const app = express();
 
-app.use(express.json())
-app.use(morgan(':method :url :body'))
+app.use(express.json());
+
+app.use(morgan('tiny'))
 
 let persons = [
   {
@@ -50,19 +51,14 @@ app.post("/api/persons", (request, response) => {
     (person) => person.name.toLowerCase() === newPerson.name.toLowerCase()
   );
 
-
-
   if (existingPerson) {
     response.json({ error: "name must be unique" });
-  } else if(newPerson.name === "" || newPerson.number === "") {
-    response.json({error: "missing information"})
-  }else {
+  } else if (newPerson.name === "" || newPerson.number === "") {
+    response.json({ error: "missing information" });
+  } else {
     persons = persons.concat(newPerson);
-    console.log(newPerson);
-    response.json(newPerson);
-    morgan.token('body', request => JSON.stringify(request.body))
-    
   }
+  morgan.token('body', request => JSON.stringify(request.body))
 });
 
 app.get("/", (request, response) => {
