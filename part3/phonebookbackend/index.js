@@ -1,10 +1,12 @@
 const express = require("express");
 var morgan = require("morgan");
 const app = express();
+const baseUrl = 'http://localhost:3001/api/notes'
 
 app.use(express.json());
 
-app.use(morgan('tiny'))
+app.use(morgan('tiny'));
+
 
 let persons = [
   {
