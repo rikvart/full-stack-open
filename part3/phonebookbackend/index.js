@@ -5,7 +5,7 @@ const baseUrl = 'http://localhost:3001/api/notes'
 
 app.use(express.json());
 
-app.use(morgan('tiny'));
+app.use(morgan(':url :method :body'));
 
 
 let persons = [
