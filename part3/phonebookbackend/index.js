@@ -1,12 +1,19 @@
+const bodyParser = require("body-parser");
 const express = require("express");
 var morgan = require("morgan");
 const app = express();
 const baseUrl = 'http://localhost:3001/api/notes'
 
 app.use(express.json());
+app.use(bodyParser.json())
 
-app.use(morgan(':url :method :body'));
 
+
+morgan.token('body', req => {
+  return JSON.stringify(req.body)
+})
+
+app.use(morgan('tiny'));
 
 let persons = [
   {
@@ -31,6 +38,16 @@ let persons = [
   },
 ];
 
+const logResponseBody = (req, res, next) => {
+  let oldSend = res.send;
+  res.send = function (body) {
+    console.log('Response Body:', body); // Log the response body here
+    oldSend.apply(res, arguments); // Call the original `send` method
+  };
+  next();
+};
+
+
 const generateId = () => {
   const maxId =
     persons.length > 0 ? Math.max(...persons.map((n) => Number(n.id))) : 0;
@@ -42,7 +59,7 @@ const personsNum = () => {
   return amount;
 };
 
-app.post("/api/persons", (request, response) => {
+app.post("/api/persons", logResponseBody, morgan(':method :url :status :res[content-length] - :response-time ms :body'), (request, response) => {
   const newPerson = {
     id: generateId(),
     name: request.body.name,
@@ -59,8 +76,8 @@ app.post("/api/persons", (request, response) => {
     response.json({ error: "missing information" });
   } else {
     persons = persons.concat(newPerson);
+    response.status(201).json(newPerson);
   }
-  morgan.token('body', request => JSON.stringify(request.body))
 });
 
 app.get("/", (request, response) => {
@@ -75,6 +92,7 @@ app.get("/info", (request, response) => {
 
 app.get("/api/persons", (request, response) => {
   response.json(persons);
+  
 });
 
 app.delete("/api/persons/:id", (request, response) => {

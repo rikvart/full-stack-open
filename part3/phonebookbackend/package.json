@@ -11,6 +11,7 @@
   "author": "Riku Vartiainen",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.20.3",
     "express": "^4.19.2",
     "morgan": "^1.10.0"
   },
