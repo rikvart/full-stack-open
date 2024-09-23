@@ -1,11 +1,16 @@
 const bodyParser = require("body-parser");
 const express = require("express");
+const cors = require("cors");
 var morgan = require("morgan");
 const app = express();
 const baseUrl = 'http://localhost:3001/api/notes'
 
+
 app.use(express.json());
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(cors());
+
+
 
 
 
@@ -41,8 +46,8 @@ let persons = [
 const logResponseBody = (req, res, next) => {
   let oldSend = res.send;
   res.send = function (body) {
-    console.log('Response Body:', body); // Log the response body here
-    oldSend.apply(res, arguments); // Call the original `send` method
+    console.log('Response Body:', body);
+    oldSend.apply(res, arguments); 
   };
   next();
 };
@@ -66,6 +71,8 @@ app.post("/api/persons", logResponseBody, morgan(':method :url :status :res[cont
     number: request.body.number.toString(),
   };
 
+
+
   const existingPerson = persons.find(
     (person) => person.name.toLowerCase() === newPerson.name.toLowerCase()
   );
@@ -79,6 +86,8 @@ app.post("/api/persons", logResponseBody, morgan(':method :url :status :res[cont
     response.status(201).json(newPerson);
   }
 });
+
+
 
 app.get("/", (request, response) => {
   response.send("<h1>Hello World!</h1>");
