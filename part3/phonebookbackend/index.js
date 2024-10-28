@@ -3,22 +3,17 @@ const express = require("express");
 const cors = require("cors");
 var morgan = require("morgan");
 const app = express();
-const baseUrl = 'http://localhost:3001/api/notes'
-
+const baseUrl = "http://localhost:3001/api/notes";
 
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors());
 
+morgan.token("body", (req) => {
+  return JSON.stringify(req.body);
+});
 
-
-
-
-morgan.token('body', req => {
-  return JSON.stringify(req.body)
-})
-
-app.use(morgan('tiny'));
+app.use(morgan("tiny"));
 
 let persons = [
   {
@@ -46,12 +41,11 @@ let persons = [
 const logResponseBody = (req, res, next) => {
   let oldSend = res.send;
   res.send = function (body) {
-    console.log('Response Body:', body);
-    oldSend.apply(res, arguments); 
+    console.log("Response Body:", body);
+    oldSend.apply(res, arguments);
   };
   next();
 };
-
 
 const generateId = () => {
   const maxId =
@@ -64,30 +58,31 @@ const personsNum = () => {
   return amount;
 };
 
-app.post("/api/persons", logResponseBody, morgan(':method :url :status :res[content-length] - :response-time ms :body'), (request, response) => {
-  const newPerson = {
-    id: generateId(),
-    name: request.body.name,
-    number: request.body.number.toString(),
-  };
+app.post(
+  "/api/persons",
+  logResponseBody,
+  morgan(":method :url :status :res[content-length] - :response-time ms :body"),
+  (request, response) => {
+    const newPerson = {
+      id: generateId(),
+      name: request.body.name,
+      number: request.body.number.toString(),
+    };
 
+    const existingPerson = persons.find(
+      (person) => person.name.toLowerCase() === newPerson.name.toLowerCase()
+    );
 
-
-  const existingPerson = persons.find(
-    (person) => person.name.toLowerCase() === newPerson.name.toLowerCase()
-  );
-
-  if (existingPerson) {
-    response.json({ error: "name must be unique" });
-  } else if (newPerson.name === "" || newPerson.number === "") {
-    response.json({ error: "missing information" });
-  } else {
-    persons = persons.concat(newPerson);
-    response.status(201).json(newPerson);
+    if (existingPerson) {
+      response.json({ error: "name must be unique" });
+    } else if (newPerson.name === "" || newPerson.number === "") {
+      response.json({ error: "missing information" });
+    } else {
+      persons = persons.concat(newPerson);
+      response.status(201).json(newPerson);
+    }
   }
-});
-
-
+);
 
 app.get("/", (request, response) => {
   response.send("<h1>Hello World!</h1>");
@@ -101,7 +96,6 @@ app.get("/info", (request, response) => {
 
 app.get("/api/persons", (request, response) => {
   response.json(persons);
-  
 });
 
 app.delete("/api/persons/:id", (request, response) => {

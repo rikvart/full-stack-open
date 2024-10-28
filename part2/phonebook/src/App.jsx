@@ -105,18 +105,14 @@ const App = () => {
     setNewNumber("");
     setTimeout(() => {
       setErrorMessage(null);
-    }, 3000); // Clear notification after 3 seconds
+    }, 3000);
   };
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
 
-  const handleFilter = (event) => {
-    const currentValue = filter;
-    const filtered = users.filter((user) => user.name.includes(currentValue));
-    setFilteredUsers(filtered);
-  };
+  
 
   return (
     <div>

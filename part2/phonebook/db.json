@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "id": "1",
-      "name": "test",
-      "number": "test1213"
-    },
-    {
       "id": "2",
       "name": "test1",
       "number": "test"
@@ -24,6 +19,11 @@
       "id": "bf2f",
       "name": "21312312412",
       "number": "test1213124123"
+    },
+    {
+      "id": "22cb",
+      "name": "",
+      "number": ""
     }
   ]
 }
