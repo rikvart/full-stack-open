@@ -1,8 +1,0 @@
-POST http://localhost:3001/api/persons
-Content-Type: application/json
-
-{
-    "name": "VS code rest cilient is pretty good",
-    "number": 123451234
-
-}
