@@ -1,8 +1,16 @@
 import { useState } from 'react'
 
-const conditionalRender = (props) => {
-  // ADD CODE HERE NEXT
-}
+const ConditionalRender = (props) => {
+
+  console.log(props)
+  if(props.all.length > 0)
+    return (
+    <Statistics bad={props.bad} neutral={props.neutral} good={props.good} />
+    )
+  else return (
+    <div>No feedback recorded</div>
+  )
+} 
 
 
 const Statistics = (props) => {
@@ -67,7 +75,7 @@ const App = () => {
       <button onClick={handleBadClick}>Bad</button>
       <div>
       </div>
-      <Statistics good={good} neutral={neutral} bad={bad}/>
+      <ConditionalRender all={all} good={good} neutral={neutral} bad={bad}/>
    </div>
     
   )
